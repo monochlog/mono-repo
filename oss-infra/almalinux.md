@@ -2,11 +2,10 @@
 
 ## ネットワーク設定
 
-/etc/sysconfig/network-scripts/eth03S
+/etc/sysconfig/network-scripts/ifcig-enp0s3
 
-```bash:追記
-IPADDR=192.168.10
-PREFIX=24
-```
+>IPADDR=192.168.10<br>
+>PREFIX=24
+
 
 
