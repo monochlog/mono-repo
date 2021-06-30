@@ -8,19 +8,30 @@
  `localectl set-locale LANG=ja_JP.UTF8`
 
 ## hostname設定
->hostnamectl set-hostname @@@@<br>
->@@@@はサーバ毎。
+```
+hostnamectl set-hostname @@@@ #@@@@はサーバ毎。
+```
 
 ## selinux無効化
 - /etc/selinux/config
->SELINUX=disabled
+```
+SELINUX=disabled
+```
 
 ## firewall無効化
->systemctl stop firewalld<br>
->systemctl disabled firewalld
+```
+systemctl stop firewalld
+systemctl disabled firewalld
+```
 
 ## ネットワーク設定
 - /etc/sysconfig/network-scripts/ifcfg-enp0s3
->BOOTPROMO =dhcp
+```
+BOOTPROMO =dhcp
+```
 
 ## sshd設定
+```
+port 22 #コメントアウトを外す
+```
+
