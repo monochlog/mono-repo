@@ -12,8 +12,8 @@
 
 /etc/sysconfig/network-scripts/ifcig-enp0s3
 
->IPADDR=xx.xx.xx.@@<br>
->PREFIX=24
-
+>IPADDR=xx.xx.xx.xx<br>
+>PREFIX=24<br>
+>必要に応じてipv6をnoにする。
 
 
