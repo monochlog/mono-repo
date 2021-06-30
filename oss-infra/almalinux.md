@@ -1,11 +1,18 @@
 # alma linux パラメータ設定(Web#1)
 
+## keylayout設定
+`localectl set-keymap jp106` #日本語キーボードの有効化
+
+## ロケール設定
+ `dnf install glibc-langpack-ja` #日本語パックの導入<br>
+ `localectl set-locale LANG=ja_JP.UTF8`
+
 ## hostname設定
 >hostnamectl set-hostname @@@@<br>
 >@@@@はサーバ毎。
 
 ## selinux無効化
-/etc/selinux/config
+- /etc/selinux/config
 >SELINUX=disabled
 
 ## firewall無効化
@@ -13,11 +20,7 @@
 >systemctl disabled firewalld
 
 ## ネットワーク設定
+- /etc/sysconfig/network-scripts/ifcfg-enp0s3
+>BOOTPROMO =dhcp
 
-/etc/sysconfig/network-scripts/ifcig-enp0s3
-
->IPADDR=xx.xx.xx.xx<br>
->PREFIX=24<br>
->必要に応じてipv6をnoにする。
-
-
+## sshd設定
