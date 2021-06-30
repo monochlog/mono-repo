@@ -8,6 +8,10 @@
 /etc/selinux/config
 >SELINUX=disabled
 
+## firewall無効化
+>systemctl stop firewalld<br>
+>systemctl disabled firewalld
+
 ## ネットワーク設定
 
 /etc/sysconfig/network-scripts/ifcig-enp0s3
