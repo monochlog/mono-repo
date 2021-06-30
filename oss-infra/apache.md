@@ -1,7 +1,7 @@
 # apache パラメータシート
 
 ## install
->#dnf isntall httpd
+>`dnf isntall httpd`
 
 ## 設定
 
