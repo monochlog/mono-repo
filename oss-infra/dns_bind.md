@@ -20,5 +20,4 @@ allow-query     { localhost; internal-network;};
 
 #最下部に追加
 
-
 ```
