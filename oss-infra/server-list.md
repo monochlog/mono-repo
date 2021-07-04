@@ -4,5 +4,5 @@
 -|-
 |Websvr01|xx.xx.xx.10|
 |Websvr02|xx.xx.xx.11|
-|DNSsvr01|xx.xx.xx.90|
+|MNGsvr01|xx.xx.xx.90|
 

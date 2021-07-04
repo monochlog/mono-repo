@@ -1,9 +1,17 @@
-# DNSサーバ(BIND)
+# MNGサーバ
 
-## インストール
+## open-ssl
+`dnf install open-ssl`
+
+## サーバ証明書作成
+### 共通の秘密鍵
+### Websvr01用
+
+## DNS-BIND
+### インストール
 `dnf install bind bind-utils`
 
-## 設定
+### 設定
 - /etc/named.conf
 ```
 #追加
