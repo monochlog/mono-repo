@@ -8,24 +8,12 @@
 ## 設定
 
 ### /etc/httpd/conf/httpd.conf
-```
-ServerAdmin ttt@mmmm.com   #必要であれば管理者のメールアドレスに変更
-ServerName websvr10.local:80   #サーバ名指定
-Options FollowSymLinks   #indexesの無効化
-AllowOverride noe  #.htaccess は利用しない
-ServerTokens Prod  #サーバーの応答ヘッダ
-```
-``` #https用追記
-<VirtualHost *:80>
-  ServerName example.com:80
-  RewriteEngine on
-  RewriteCond %{HTTP_HOST} ^example\.com
-  RewriteRule ^/(.*)$ https://example.com/$1 [R=301,L]
-</VirtualHost>
-```
 
-## サーバ証明書の作成(自己証明書)
-`mkdir /etc/httpd/svrcrt`
+リポジトリ conf/httpd.confに記載
+## /etc/httpd/conf.d/ssl.conf
+リポジトリ /conf/ssl.confに記載
+## サーバ証明書の作成(自己証明書 san対応)
+`mkdir /etc/httpd/svrcrt`  #どこでもいい
 `openssl genrsa -aes128 2048 > server.pem`#秘密鍵の作成、任意のパスフレーズを入力
 
 `openssl req -new -key server.pem > server.csr`#公開鍵の作成
@@ -62,4 +50,3 @@ subjectAltName = IP:192.168.56.10,DNS:*.local
 
 `mv server.pem server.pem.back`# パスフレーズの省略化前バックアップ<br>
 `openssl rsa -in server.pem.back -out server.pem` # パスフレーズの省略化
-
