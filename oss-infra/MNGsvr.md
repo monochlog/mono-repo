@@ -1,4 +1,4 @@
-# MNGサーバ
+# MNGサーバ構築メモ（作成中）
 
 ## open-ssl
 `dnf install open-ssl`

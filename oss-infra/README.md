@@ -7,11 +7,13 @@
 サーバ一覧
 
 ## almalinux.md
-AlmaLinuxでの設定
+AlmaLinuxでの共通設定
 
 ## apache.md
-apache構築時のメモ
+Websvrでのapache構築時のメモ
 
+## MNGsvr.md
+MNGsvrでの構築時のメモ（作成中）
 ## /conf配下
 作成済みの各種configファイル
 
