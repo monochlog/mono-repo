@@ -1,9 +1,9 @@
 # apache パラメータシート
 
 ## install
-`dnf isntall httpd`
+`dnf install httpd`
 
-`dnf isntall mod-ssl` #SSL対応
+`dnf install mod-ssl` #SSL対応
 
 ## 設定
 
