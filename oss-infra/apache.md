@@ -51,14 +51,14 @@ A challenge password[]:（任意）
 An optional company name []:（任意）
 ```
 
-`openssl x509 -req -days 365 -sha256 -in server.csr -signkey server.pem -out server.crt -extfile san` # サーバ証明書の発行(san含む)
-
 事前にsan用のファイルを作成する
 
 `vi /etc/host/svrcrt/san`
 ```
 subjectAltName = IP:192.168.56.10,DNS:*.local
 ```
+
+`openssl x509 -req -days 365 -sha256 -in server.csr -signkey server.pem -out server.crt -extfile san` # サーバ証明書の発行(san含む)
 
 `mv server.pem server.pem.back`# パスフレーズの省略化前バックアップ<br>
 `openssl rsa -in server.pem.back -out server.pem` # パスフレーズの省略化
