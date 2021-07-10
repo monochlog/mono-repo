@@ -50,3 +50,5 @@ subjectAltName = IP:192.168.56.10,DNS:*.local
 
 `mv server.pem server.pem.back`# パスフレーズの省略化前バックアップ<br>
 `openssl rsa -in server.pem.back -out server.pem` # パスフレーズの省略化
+
+## tomcatとの連携
