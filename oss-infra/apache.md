@@ -43,7 +43,7 @@ An optional company name []:（任意）
 
 `vi /etc/host/svrcrt/san`
 ```
-subjectAltName = IP:192.168.56.10,DNS:*.local
+subjectAltName = IP:192.168.56.xx,DNS:*.local
 ```
 
 `openssl x509 -req -days 365 -sha256 -in server.csr -signkey server.pem -out server.crt -extfile san` # サーバ証明書の発行(san含む)
@@ -52,3 +52,11 @@ subjectAltName = IP:192.168.56.10,DNS:*.local
 `openssl rsa -in server.pem.back -out server.pem` # パスフレーズの省略化
 
 ## tomcatとの連携
+### /etc/httpd/conf.modules.d/00-proxy.conf
+- mod_proxyとmod_proxy_ajpの有効化<br>
+(デフォルトで有効な状態でした)
+```
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+```
+

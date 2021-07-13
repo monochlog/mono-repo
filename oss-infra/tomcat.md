@@ -15,7 +15,7 @@
 
 `sudo useradd -s /bin/nologin -g tomcat -d /opt/tomcat tomcat` # ユーザ追加
 
-`cat /etc/password | grep tomcat ` #ユーザ追加の確認
+`cat /etc/passwd | grep tomcat ` #ユーザ追加の確認
 
 `wget https://downloads.apache.org/tomcat/tomcat-10/v10.0.8/bin/apache-tomcat-10.0.8.tar.gz` #インストールファイルの取得
 
@@ -40,8 +40,25 @@ RemainAfterExit=true
 
 ExecStart=/opt/tomcat/bin/startup.sh
 ExecStop=/opt/tomcat/bin/shutdown.sh
-ExecReStart=/opt/tomcat/bin/shutdown.sh;/opt/tomcat/bin/startup.sh
 
 [Install]
 WantedBy=multi-user.target
+```
+
+## Apacheとの連携
+
+### /opt/tomcat/conf/server.xml 
+```
+   <!--
+    <Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+    --> #コメントアウト化
+
+    <!-- Define an AJP 1.3 Connector on port 8009 -->
+    <Connector protocol="AJP/1.3"
+               address="0:0:0:0 "
+               port="8009"
+               redirectPort="8443"
+               secretRequired="false" />
 ```
