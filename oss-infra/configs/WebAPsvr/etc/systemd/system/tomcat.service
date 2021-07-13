@@ -1,0 +1,16 @@
+[Unit]
+Description=Apache Tomcat 10
+After=network.target
+
+[Service]
+User=tomcat
+Group=tomcat
+Type=oneshot
+PIDFile=/opt/tomcat/tomcat.pid
+RemainAfterExit=true
+
+ExecStart=/opt/tomcat/bin/startup.sh
+ExecStop=/opt/tomcat/bin/shutdown.sh
+
+[Install]
+WantedBy=multi-user.target

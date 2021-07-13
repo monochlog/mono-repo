@@ -62,3 +62,11 @@ WantedBy=multi-user.target
                redirectPort="8443"
                secretRequired="false" />
 ```
+
+### /opt/tomcat/conf/tomcat-users.xml 
+下のほうにあるユーザ設定を有効化、かつロール名、パスワードを修正
+```
+  <role rolename="manager-gui"/>
+  <role rolename="admin-gui"/>
+  <user username="tomcat" password="tomcat" roles="manager-gui,admin-gui"/>
+ ```
