@@ -17,7 +17,7 @@
 SELINUX=disabled
 ```
 
-## firewall無効化
+## firewalld無効化
 ```
 systemctl stop firewalld
 systemctl disabled firewalld
