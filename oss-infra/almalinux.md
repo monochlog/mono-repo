@@ -1,38 +1,45 @@
 # alma linux パラメータ設定(Web#1)
 
-## keylayout設定
-`localectl set-keymap jp106` #日本語キーボードの有効化
+### keylayout設定
+```shell
+# localectl set-keymap jp106 #日本語キーボードの有効化
+``` 
+### ロケール設定
+ ```shell
+ # dnf install glibc-langpack-ja  #日本語パックの導入<br>
+ # localectl set-locale LANG=ja_JP.UTF8
+```
 
-## ロケール設定
- `dnf install glibc-langpack-ja` #日本語パックの導入<br>
- `localectl set-locale LANG=ja_JP.UTF8`
+### hostname設定
 
-## hostname設定
+```shell
+# hostnamectl set-hostname @@@@` #@@@@はサーバ毎。
+```
 
-`hostnamectl set-hostname @@@@` #@@@@はサーバ毎。
-
-## selinux無効化
+### selinux無効化
 - /etc/selinux/config
 ```
 SELINUX=disabled
 ```
 
-## firewalld無効化
-```
-systemctl stop firewalld
-systemctl disabled firewalld
+### firewalld無効化
+```shell
+# systemctl stop firewalld
+# systemctl disabled firewalld
 ```
 
-## ネットワーク設定
+### ネットワーク設定
 - /etc/sysconfig/network-scripts/ifcfg-enp0s8
-`nmtui`
+```shell
+# nmtui
+```
 ```
 address 192.168.56.xx
 gateway 195.168.56.1
 DNS servers 195.168.56.1
 ```
 
-## sshd設定
+### sshd設定
 - /etc/ssh/sshd_config
 ```
 port 22 #コメントアウトを外す
