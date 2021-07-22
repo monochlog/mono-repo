@@ -2,11 +2,11 @@
 
 ### keylayout設定
 ```shell
-# localectl set-keymap jp106 #日本語キーボードの有効化
+# localectl set-keymap jp106
 ``` 
-### ロケール設定
+### ロケール設定 
  ```shell
- # dnf install glibc-langpack-ja  #日本語パックの導入<br>
+ # dnf install glibc-langpack-ja
  # localectl set-locale LANG=ja_JP.UTF8
 ```
 
@@ -25,6 +25,9 @@ SELINUX=disabled
 ### firewalld無効化
 ```shell
 # systemctl stop firewalld
+```
+and
+```shell
 # systemctl disabled firewalld
 ```
 
