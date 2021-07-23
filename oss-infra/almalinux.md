@@ -31,7 +31,7 @@ and
 # systemctl disabled firewalld
 ```
 
-### ネットワーク設定.
+### ネットワーク設定.1
 - /etc/sysconfig/network-scripts/ifcfg-enp0s8
 ```shell
 # nmtui
