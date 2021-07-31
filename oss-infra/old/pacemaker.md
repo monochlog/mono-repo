@@ -1,4 +1,5 @@
-# pacemaker インストールメモ
+# pacemaker インストールメモ -- まともに使えないので利用しません。
+
 導入先はDBサーバ(マスター:00、スレーブ:01)
 
 pacemaker2.0 + corosyn + fence-agents(stonith)で実装
@@ -60,7 +61,7 @@ Almalinux 8.3ではデフォルトでリポジトリが無効になっている�
 
 - クラスタの開始
 ```shell
-# pcs cluster start -all
+# pcs cluster start
 ```
 - クラスターオプション設定
 いったんstonithは利用しない
@@ -84,65 +85,25 @@ Almalinux 8.3ではデフォルトでリポジトリが無効になっている�
 # pcs resource create dbsvr-vip ocf:heartbeat:IPaddr2 ip=192.168.56.101 cidr_netmask=24 op monitor interval=30s
 ```
 
+- postgresqlのリソース作成
+```shell 
+# pcs resource create pgsql-svc ocf:heartbeat:pgsql pgctl="/usr/pgsql-13/bin/pg_ctl" psql="/usr/pgsql-13/bin/psql" pgdata="/var/lib/pgsql/13/data" pgdba="postgres" pgport="5432" pglibs="/usr/pgsql-13/lib" config="/var/lib/pgsql/13/data/postgresql.conf" logfile="/dev/null" rep_mode="sync" node_list="Dbsvr00 DbSvr01" master_ip=192.168.56.101 repuser=rep_user restart_on_promote=true primary_conninfo_opt="keepalives_idle=60 keepalives_interval=5 keepalives_count=5"
+```
 
 
+```shell
+# pcs resource promotable pgsql-svc master-max=1 master-node-max=1 clone-max=2 clone-node-max=1 notify=true
+# pcs constraint colocation add dbsvr-vip with Master pgsql-svc-clone INFINITY
+# pcs constraint order promote pgsql-svc-clone then start dbsvr-vip symmetrical=false score=INFINITY
+# pcs constraint order demote pgsql-svc-clone then stop dbsvr-vip symmetrical=false score=0
+```  
+
+- 結果確認
+```shell
+# pcs status --full
+```
 
 - 管理webページへのアクセス（GUI）確認のみ
 https://@@.@@.@@.@@:2224
 
-pgcluster > 上側メニューでRESOURCE > +Add
-
-①pgsql
-```
-Resource ID pgsql-svc
- Class/Provider ocf:heartbeat
- Type   pgsql
-  -- Optional Arguments
- pgctl  /usr/pgsql-13/bin/pg_ctl
- psql  /usr/pgsql-13/bin/psql
- pgdata /var/lib/pgsql/13/data
- pgdba  postgres
- pgport 5432
- pglibs /usr/pgsql-13/lib
- config /var/lib/pgsql/13/data/postgresql.conf
- pgdb   sample
- logfile    /var/log/pgsql
- repuser    rep_user
-```
-②gw-ping
-```
-Resource ID gw-ping
- Class/Provider ocf:pacemaker
- Type   ping
-  -- Required Arguments
- host_list  192.168.56.1
-```
-③dbsvr-vip
-```
-Resource ID gw-ping
- Class/Provider ocf:hearbeat
- Type   IPaddr2
-  -- Required Arguments
- ip  192.168.56.101
-  -- Optional Arguments
- nic enp0s4
-```
-
 ### フェンス機能(STONITH)の設定
-
-
-
-
-
-
-## プライマリ設定
-`cp /etc/corosync/corosync.conf.example /etc/corosync/corosync.conf`
-
-`vi /etc/corosync/corosync.conf`
-
-`corosync-keygen -l`
-
-`scp -p /etc/corosync/authkey root@192.168.56.13:/etc/corosync/authkey`
-
-`scp -p /etc/corosync/corosync.conf root@192.168.56.13:/etc/corosync/corosync.conf`
-```
